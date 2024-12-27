@@ -1,0 +1,66 @@
+<form [formGroup]="cardForm" (ngSubmit)="onSubmit()" class="p-4 border rounded bg-light">
+  <div class="mb-3">
+    <label for="cardNumber" class="form-label">Número de Tarjeta</label>
+    <input
+      id="cardNumber"
+      formControlName="cardNumber"
+      type="text"
+      class="form-control"
+      placeholder="123456XXXXXXXXXX"
+    />
+    <div *ngIf="cardForm.get('cardNumber')?.invalid && cardForm.get('cardNumber')?.touched">
+      <small class="text-danger">Número de tarjeta debe tener 16 dígitos.</small>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="holderName" class="form-label">Nombre del Titular</label>
+    <input
+      id="holderName"
+      formControlName="holderName"
+      type="text"
+      class="form-control"
+      placeholder="Juan Pérez"
+    />
+    <div *ngIf="cardForm.get('holderName')?.invalid && cardForm.get('holderName')?.touched">
+      <small class="text-danger">Nombre y apellido son obligatorios.</small>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="expiryDate" class="form-label">Fecha de Vencimiento</label>
+    <input
+      id="expiryDate"
+      formControlName="expiryDate"
+      type="text"
+      class="form-control"
+      placeholder="mm/aaaa"
+    />
+    <div *ngIf="cardForm.get('expiryDate')?.invalid && cardForm.get('expiryDate')?.touched">
+      <small class="text-danger">Fecha debe ser válida y posterior a 3 años desde hoy.</small>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="currency" class="form-label">Moneda</label>
+    <select id="currency" formControlName="currency" class="form-select">
+      <option value="USD">Dólares (USD)</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="cardType" class="form-label">Tipo de Tarjeta</label>
+    <select id="cardType" formControlName="cardType" class="form-select">
+      <option value="CREDIT">Crédito</option>
+      <option value="DEBIT">Débito</option>
+    </select>
+  </div>
+
+  <button 
+    type="submit" 
+    class="btn btn-primary mt-3" 
+    [disabled]="cardForm.invalid"
+  >
+    Crear Tarjeta
+  </button>
+</form>
